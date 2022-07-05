@@ -10,16 +10,16 @@ config_version=4
 
 [application]
 
-config/name="LibertySpaceBall"
-run/main_scene="res://Gameplay/Gameplay.tscn"
-config/icon="res://icon.png"
+config/name="Liberty Space Ball"
+run/main_scene="res://game_scenes/GamePlay.tscn"
+config/icon="res://media/images/icon.png"
 
 [display]
 
 window/size/width=360
 window/size/height=640
 window/dpi/allow_hidpi=true
-window/handheld/orientation="portrait"
+window/handheld/orientation="sensor_portrait"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
