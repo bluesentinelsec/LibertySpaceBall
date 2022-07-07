@@ -1,24 +1,10 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 export (PackedScene) var Ball
 var starting_ball_count
 var ball_count
-
-var design = """
-
-listen for ball despawn signal
-if ball despawns
-	decrement number of balls in play
-	
-if balls in play == 0
-	increment balls in play
-	launch balls
-	
-"""
+var ball_position
 
 func spawn_balls(number):
 	for i in range(number):
@@ -33,6 +19,7 @@ func _on_despawn_ball():
 func _on_player_lose():
 	print("decrement life")
 	ball_count -= 1
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

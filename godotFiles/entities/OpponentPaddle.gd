@@ -4,17 +4,30 @@ extends Area2D
 var ball_position
 var speed
 var velocity
+var screensize
 
-# Called when the node enters the scene tree for the first time.
+
+func set_speed(the_speed):
+	speed = the_speed
+
+func init_screensize():
+	screensize = get_viewport_rect().size
+
+func set_ball_position(the_position):
+	ball_position = the_position
+	
+func get_default_ball_position():
+	var default_position = Vector2(screensize.x / 2, screensize.y / 2)
+	return default_position
+
 func _ready():
-	speed = 100
+	set_speed(150)
+	init_screensize()
+	set_ball_position(get_default_ball_position())
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	velocity = Vector2()
-	# ball_position = get_parent().get_node("Ball").position
-	ball_position = Vector2(100, 100)
 	
 	if ball_position.x < position.x:
 		velocity = Vector2.LEFT

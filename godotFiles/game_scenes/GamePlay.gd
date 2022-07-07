@@ -1,35 +1,25 @@
 extends Node2D
 
+var screensize
+var ball_position
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-var design = """
-on game start:
-	create ball
+func init_screensize():
+	screensize = get_viewport_rect().size
 	
-if player scores:
-	increment number of balls in play
-	restart match
-	
-if opponent scores:
-	decrement life
-	restart match
-
-if restart match:
-	reset player and opponent positions
-	while number of balls created < balls in play
-		create ball
-	
-if player lives equals 0
-	go to end screen
-"""
-
+func get_first_ball_position():
+	var children_in_scene = $BallManager.get_children()
+	for each_child in children_in_scene:
+		if each_child.is_in_group("balls"):
+			ball_position = each_child.position
+			return
+			
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	init_screensize()
+	ball_position = Vector2(screensize.x / 2, screensize.y / 2)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	get_first_ball_position()
+	$OpponentPaddle.set_ball_position(ball_position)

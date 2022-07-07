@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0
 
-[node name="Ball" type="Area2D"]
+[node name="Ball" type="Area2D" groups=["balls"]]
 position = Vector2( 174, 145 )
 scale = Vector2( 0.7, 0.7 )
 script = ExtResource( 2 )

@@ -13,6 +13,8 @@ script = ExtResource( 7 )
 
 [node name="Background" parent="." instance=ExtResource( 6 )]
 
+[node name="BallManager" parent="." instance=ExtResource( 2 )]
+
 [node name="OpponentPaddle" parent="." instance=ExtResource( 1 )]
 
 [node name="PauseButton" parent="." instance=ExtResource( 3 )]
@@ -20,5 +22,3 @@ script = ExtResource( 7 )
 [node name="PlayerPaddle" parent="." instance=ExtResource( 4 )]
 
 [node name="TouchPad" parent="." instance=ExtResource( 5 )]
-
-[node name="BallManager" parent="." instance=ExtResource( 2 )]
