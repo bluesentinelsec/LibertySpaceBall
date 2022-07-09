@@ -8,17 +8,25 @@ var direction
 var speed
 var x_axis_origin_offset
 var rng
+var shouldWait1Second
 
 
 func _ready():
+	init_sleep()
+	init_random_number_generator()
 	init_screensize()
 	init_position()
-	init_random_number_generator()
 	set_random_direction()
 	init_speed()
 	init_x_axis_origin_offset()
+	
+func init_sleep():
+	shouldWait1Second = true
 
 func _process(delta):
+	if shouldWait1Second == true:
+		return
+		
 	change_x_dir_if_off_screen()
 	# ToDo: call queue_free
 	if position.y < 0 :
@@ -43,19 +51,17 @@ func init_screensize():
 	screensize = get_viewport_rect().size
 	
 func init_position():
-	position = Vector2(screensize.x / 2, screensize.y / 2)
+	var xPos = rng.randi_range(screensize.x / 2 - 8, screensize.x / 2 + 8)
+	var yPos = 128
+	position = Vector2(xPos, yPos)
 	
 func init_speed():
-	speed = 300
+	speed = rand_range(250, 350)
 
 func set_random_direction():
 	var x_dir = rand_range(0.2, 0.8)
 	var y_dir = 0
-	var up_or_down = rng.randi_range(0, 1)
-	if up_or_down == 0:
-		y_dir = Vector2.DOWN.y
-	else:
-		y_dir = Vector2.UP.y
+	y_dir = Vector2.DOWN.y
 		
 	var left_or_right = rng.randi_range(0, 1)
 	if left_or_right == 0:
@@ -84,3 +90,7 @@ func _on_Ball_area_entered(area):
 	if area.is_in_group("paddles"):
 		change_y_direction()
 		increase_speed()
+		
+
+func _on_Timer_timeout():
+	shouldWait1Second = false
