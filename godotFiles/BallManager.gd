@@ -7,12 +7,15 @@ var ball_count
 var ball_position
 
 func spawn_balls(number):
+	var delay = 0.5
+	var color = Color(0, 0, 0)
 	for i in range(number):
 		var aBall = Ball.instance()
 		aBall.connect("despawn_ball", self, "_on_despawn_ball")
 		aBall.connect("player_lose", self, "_on_player_lose")
 		add_child(aBall)
-		yield(get_tree().create_timer(0.5), "timeout")
+		yield(get_tree().create_timer(delay), "timeout")
+		delay = rand_range(1, 2)
 
 
 func _on_despawn_ball():

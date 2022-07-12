@@ -90,7 +90,6 @@ func _on_Ball_area_entered(area):
 	if area.is_in_group("paddles"):
 		change_y_direction()
 		increase_speed()
-		
 
 func _on_Timer_timeout():
 	shouldWait1Second = false
