@@ -9,9 +9,11 @@ var speed
 var x_axis_origin_offset
 var rng
 var shouldWait1Second
+var health
 
 
 func _ready():
+	init_health()
 	init_sleep()
 	init_random_number_generator()
 	init_screensize()
@@ -19,7 +21,16 @@ func _ready():
 	set_random_direction()
 	init_speed()
 	init_x_axis_origin_offset()
+
+func init_health():
+	health = 5
 	
+func set_health(health):
+	health = health
+	
+func get_health():
+	return health
+		
 func init_sleep():
 	shouldWait1Second = true
 
@@ -40,7 +51,8 @@ func _process(delta):
 	position += direction.normalized() * delta * speed
 
 func init_x_axis_origin_offset():
-	var sprite_width = $Sprite.get_texture().get_width()
+	# var sprite_width = $Sprite.get_texture().get_width()
+	var sprite_width = 32
 	x_axis_origin_offset = sprite_width / 2
 
 func init_random_number_generator():
@@ -56,7 +68,7 @@ func init_position():
 	position = Vector2(xPos, yPos)
 	
 func init_speed():
-	speed = rand_range(250, 350)
+	speed = rand_range(200, 350)
 
 func set_random_direction():
 	var x_dir = rand_range(0.2, 0.8)
@@ -93,3 +105,13 @@ func _on_Ball_area_entered(area):
 
 func _on_Timer_timeout():
 	shouldWait1Second = false
+
+func change_color(counter):
+	if counter == 0:
+		$AnimatedSprite.animation = "yellow"
+	if counter == 1:
+		$AnimatedSprite.animation = "blue"
+	if counter == 2:
+		$AnimatedSprite.animation = "red"
+	if counter == 3:
+		$AnimatedSprite.animation = "white"

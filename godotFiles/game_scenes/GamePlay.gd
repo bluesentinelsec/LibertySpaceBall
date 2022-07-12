@@ -12,7 +12,10 @@ func get_first_ball_position():
 		if each_child.is_in_group("balls"):
 			ball_position = each_child.position
 			return
-			
+
+func _on_player_lose():
+	print("decrement heart")
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_screensize()

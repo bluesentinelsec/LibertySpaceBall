@@ -8,21 +8,28 @@ var ball_position
 
 func spawn_balls(number):
 	var delay = 0.5
-	var color = Color(0, 0, 0)
+	var cycle_color = 0
 	for i in range(number):
 		var aBall = Ball.instance()
 		aBall.connect("despawn_ball", self, "_on_despawn_ball")
 		aBall.connect("player_lose", self, "_on_player_lose")
 		add_child(aBall)
+		aBall.change_color(cycle_color)
 		yield(get_tree().create_timer(delay), "timeout")
-		delay = rand_range(1, 2)
+		
+		delay = rand_range(0.5, 1.0)
+		print("ball spawn delay: ", delay)
+
+		if cycle_color >= 3:
+			cycle_color = 0
+		else:
+			cycle_color += 1
 
 
 func _on_despawn_ball():
 	ball_count -= 1
 	
 func _on_player_lose():
-	print("decrement life")
 	ball_count -= 1
 
 	
