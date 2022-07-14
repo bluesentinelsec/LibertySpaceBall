@@ -1,5 +1,6 @@
 extends Node2D
 
+signal alert_level_player_lose
 
 export (PackedScene) var Ball
 var starting_ball_count
@@ -17,8 +18,7 @@ func spawn_balls(number):
 		aBall.change_color(cycle_color)
 		yield(get_tree().create_timer(delay), "timeout")
 		
-		delay = rand_range(0.5, 1.0)
-		print("ball spawn delay: ", delay)
+		delay = rand_range(0.5, 1.5)
 
 		if cycle_color >= 3:
 			cycle_color = 0
@@ -31,6 +31,7 @@ func _on_despawn_ball():
 	
 func _on_player_lose():
 	ball_count -= 1
+	emit_signal("alert_level_player_lose")
 
 	
 # Called when the node enters the scene tree for the first time.
