@@ -4,6 +4,7 @@ var screensize
 var ball_position
 var starting_hearts
 var hearts_in_play
+var should_delete_heart
 
 func init_screensize():
 	screensize = get_viewport_rect().size
@@ -24,6 +25,7 @@ func init_hearts():
 	
 
 func _ready():
+	should_delete_heart = false
 	init_screensize()
 	init_hearts()
 	ball_position = Vector2(screensize.x / 2, screensize.y / 2)
@@ -31,16 +33,19 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if should_delete_heart:
+		delete_last_heart()
+		
 	get_first_ball_position()
 	$OpponentPaddle.set_ball_position(ball_position)
 	check_end_game()
 
 func check_end_game():
 	if hearts_in_play <= 0:
-		print("should end game")
+		get_tree().change_scene("res://game_scenes/EndScreen.tscn")
 
 func _on_BallManager_alert_level_player_lose():
-	delete_last_heart()
+	should_delete_heart = true
 		
 func delete_last_heart():
 	var hearts = get_tree().get_nodes_in_group("hearts")
@@ -50,4 +55,5 @@ func delete_last_heart():
 		if counter == last_heart:
 			eachHeart.queue_free()
 			hearts_in_play -= 1
+			should_delete_heart = false
 		counter += 1

@@ -1,22 +1,5 @@
 extends Area2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-var design = """
-The player paddle spawns on the bottom of the screen
-
-the player paddle can move left or right based on the:
-	keyboard
-	finger position
-	
-the player paddle is clamped to the screen
-
-
-"""
-
 var screensize
 var touch_zone
 var x_axis_origin_offset

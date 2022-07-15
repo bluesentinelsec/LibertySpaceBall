@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Liberty Space Ball"
-run/main_scene="res://game_scenes/GamePlay.tscn"
+run/main_scene="res://game_scenes/SplashScreen.tscn"
 config/icon="res://media/images/icon.png"
 
 [display]
