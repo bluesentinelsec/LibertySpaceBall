@@ -13,6 +13,7 @@ var health
 
 
 func _ready():
+	play_spawn_ball()
 	init_health()
 	init_sleep()
 	init_random_number_generator()
@@ -85,8 +86,10 @@ func set_random_direction():
 	
 func change_x_dir_if_off_screen():
 	if position.x - x_axis_origin_offset <= 0:
+		play_bounce_paddle()
 		change_horizontal_direction()
 	if position.x + x_axis_origin_offset >= screensize.x:
+		play_bounce_paddle()
 		change_horizontal_direction()
 
 func change_horizontal_direction():
@@ -100,6 +103,7 @@ func increase_speed():
 
 func _on_Ball_area_entered(area):
 	if area.is_in_group("paddles"):
+		play_bounce_paddle()
 		change_y_direction()
 		increase_speed()
 
@@ -115,3 +119,10 @@ func change_color(counter):
 		$AnimatedSprite.animation = "red"
 	if counter == 3:
 		$AnimatedSprite.animation = "white"
+		
+func play_bounce_paddle():
+	$Bounce_Paddle.play()
+	
+	
+func play_spawn_ball():
+	$Ball_Spawn.play()

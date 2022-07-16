@@ -34,6 +34,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if should_delete_heart:
+		$damage.play()
 		delete_last_heart()
 		
 	get_first_ball_position()
