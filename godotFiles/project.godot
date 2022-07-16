@@ -14,6 +14,10 @@ config/name="Liberty Space Ball"
 run/main_scene="res://game_scenes/SplashScreen.tscn"
 config/icon="res://media/images/icon.png"
 
+[autoload]
+
+Music="*res://entities/Music.tscn"
+
 [display]
 
 window/size/width=360

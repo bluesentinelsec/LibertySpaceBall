@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Mozart_Rondo_Alla_Turca.wav-43e08999303fdeec8da2cd3ba7a4318e.sample"
+
+[deps]
+
+source_file="res://media/music/Mozart_Rondo_Alla_Turca.wav"
+dest_files=[ "res://.import/Mozart_Rondo_Alla_Turca.wav-43e08999303fdeec8da2cd3ba7a4318e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
