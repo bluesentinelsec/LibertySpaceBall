@@ -11,17 +11,23 @@ config_version=4
 [application]
 
 config/name="Liberty Space Ball"
+config/description="A retro-inspired game for mobile"
 run/main_scene="res://game_scenes/SplashScreen.tscn"
+run/disable_stdout=true
+run/disable_stderr=true
 config/icon="res://media/images/icon.png"
 
 [autoload]
 
 Music="*res://entities/Music.tscn"
+ScoreModel="*res://entities/ScoreModel.tscn"
 
 [display]
 
 window/size/width=360
 window/size/height=640
+window/size/fullscreen=true
+window/size/always_on_top=true
 window/dpi/allow_hidpi=true
 window/handheld/orientation="sensor_portrait"
 window/stretch/mode="viewport"

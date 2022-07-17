@@ -25,6 +25,7 @@ func init_hearts():
 	
 
 func _ready():
+	$"/root/ScoreModel".reset_score()
 	should_delete_heart = false
 	init_screensize()
 	init_hearts()
@@ -47,6 +48,11 @@ func check_end_game():
 
 func _on_BallManager_alert_level_player_lose():
 	should_delete_heart = true
+	
+
+func _on_alert_player_scored():
+	$"/root/ScoreModel".set_score(1)
+	print("player score: ", $"/root/ScoreModel".get_score())
 		
 func delete_last_heart():
 	var hearts = get_tree().get_nodes_in_group("hearts")
@@ -58,3 +64,9 @@ func delete_last_heart():
 			hearts_in_play -= 1
 			should_delete_heart = false
 		counter += 1
+
+
+func _on_BallManager_update_score_ui():
+	var score = $"/root/ScoreModel".get_score()
+	var label = "Score: " + str(score)
+	$ScoreLabel.text = label

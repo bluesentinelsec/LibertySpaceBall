@@ -2,6 +2,7 @@ extends Area2D
 
 signal despawn_ball
 signal player_lose
+signal player_scored
 
 var screensize
 var direction
@@ -9,12 +10,11 @@ var speed
 var x_axis_origin_offset
 var rng
 var shouldWait1Second
-var health
+
 
 
 func _ready():
 	play_spawn_ball()
-	init_health()
 	init_sleep()
 	init_random_number_generator()
 	init_screensize()
@@ -22,15 +22,6 @@ func _ready():
 	set_random_direction()
 	init_speed()
 	init_x_axis_origin_offset()
-
-func init_health():
-	health = 5
-	
-func set_health(health):
-	health = health
-	
-func get_health():
-	return health
 		
 func init_sleep():
 	shouldWait1Second = true
@@ -40,9 +31,10 @@ func _process(delta):
 		return
 		
 	change_x_dir_if_off_screen()
-	# ToDo: call queue_free
+	
 	if position.y < 0 :
 		emit_signal("despawn_ball")
+		emit_signal("player_scored")
 		queue_free()
 		
 	if position.y > screensize.y:
@@ -52,7 +44,6 @@ func _process(delta):
 	position += direction.normalized() * delta * speed
 
 func init_x_axis_origin_offset():
-	# var sprite_width = $Sprite.get_texture().get_width()
 	var sprite_width = 32
 	x_axis_origin_offset = sprite_width / 2
 
@@ -122,7 +113,6 @@ func change_color(counter):
 		
 func play_bounce_paddle():
 	$Bounce_Paddle.play()
-	
-	
+		
 func play_spawn_ball():
 	$Ball_Spawn.play()

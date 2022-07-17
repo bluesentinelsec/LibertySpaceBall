@@ -1,6 +1,7 @@
 extends Node2D
 
 signal alert_level_player_lose
+signal update_score_ui
 
 export (PackedScene) var Ball
 var starting_ball_count
@@ -14,6 +15,7 @@ func spawn_balls(number):
 		var aBall = Ball.instance()
 		aBall.connect("despawn_ball", self, "_on_despawn_ball")
 		aBall.connect("player_lose", self, "_on_player_lose")
+		aBall.connect("player_scored", self, "_on_player_scored")
 		add_child(aBall)
 		aBall.change_color(cycle_color)
 		yield(get_tree().create_timer(delay), "timeout")
@@ -32,8 +34,11 @@ func _on_despawn_ball():
 func _on_player_lose():
 	ball_count -= 1
 	emit_signal("alert_level_player_lose")
-
 	
+func _on_player_scored():
+	$"/root/ScoreModel".set_score(1)
+	emit_signal("update_score_ui")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	starting_ball_count = 1
